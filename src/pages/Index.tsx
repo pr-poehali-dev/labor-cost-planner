@@ -109,6 +109,43 @@ const Index = () => {
       </div>
 
       <div className="container mx-auto px-6 py-8">
+        <Card className="mb-6">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-gray-50">
+                    <th className="text-left p-3 font-medium text-muted-foreground">№</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Дата открытия</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Группа</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Регион</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Формат</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">ИД</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">ОД</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">ТУ</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Общее подр-ие</th>
+                    <th className="text-left p-3 font-medium text-muted-foreground">Ресторан</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="p-3">1</td>
+                    <td className="p-3">2010-01-25</td>
+                    <td className="p-3">Группа А</td>
+                    <td className="p-3">MSK_1</td>
+                    <td className="p-3">FC</td>
+                    <td className="p-3">Геворкян Казар Авагович</td>
+                    <td className="p-3">Карпова Анна Владимировна</td>
+                    <td className="p-3">Поркул Андрей Петрович</td>
+                    <td className="p-3">1</td>
+                    <td className="p-3">0001-МСК, пл Киевского вокзала 2, ТЦ Европейский 4 этаж</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6">
             <TabsTrigger value="cockpit" className="gap-2">
