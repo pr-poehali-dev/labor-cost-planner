@@ -84,21 +84,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="border-b bg-white">
+      <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <Icon name="BarChart3" size={20} className="text-white" />
-              </div>
+            <div className="flex items-center gap-4">
+              <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <Icon name="ArrowLeft" size={20} />
+                <span className="text-sm font-medium">Назад</span>
+              </button>
+              <Separator orientation="vertical" className="h-8" />
               <div>
-                <h1 className="text-xl font-semibold text-foreground">Labor Cost Planning</h1>
-                <p className="text-sm text-muted-foreground">Ресторан #147 • Москва Тверская</p>
+                <h1 className="text-xl font-semibold text-foreground">Ресторан #147</h1>
+                <p className="text-sm text-muted-foreground">Москва, ул. Тверская, 15</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Badge variant="outline" className="text-sm">
-                <Icon name="User" size={14} className="mr-1" />
+              <Badge variant="outline" className="text-sm px-3 py-1">
+                <Icon name="User" size={14} className="mr-1.5" />
                 Директор
               </Badge>
             </div>
