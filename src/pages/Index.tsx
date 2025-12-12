@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("cockpit");
+  const [activeTab, setActiveTab] = useState("summary");
 
   const [lcData, setLcData] = useState({
     generalCleaning: false,
@@ -148,21 +148,29 @@ const Index = () => {
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6">
-            <TabsTrigger value="cockpit" className="gap-2">
-              <Icon name="LayoutDashboard" size={16} />
-              Cockpit
+            <TabsTrigger value="summary" className="gap-2">
+              <Icon name="BarChart3" size={16} />
+              Сводные итоги
             </TabsTrigger>
             <TabsTrigger value="plan" className="gap-2">
               <Icon name="FileText" size={16} />
               План LC
             </TabsTrigger>
-            <TabsTrigger value="staffing" className="gap-2">
+            <TabsTrigger value="staffing-aup" className="gap-2">
+              <Icon name="Briefcase" size={16} />
+              Staffing АУП
+            </TabsTrigger>
+            <TabsTrigger value="staffing-cbr" className="gap-2">
               <Icon name="Users" size={16} />
               Staffing ЧБР
             </TabsTrigger>
+            <TabsTrigger value="night-cleaning" className="gap-2">
+              <Icon name="Moon" size={16} />
+              Модель Ночной уборки
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="cockpit" className="space-y-6">
+          <TabsContent value="summary" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card className="border-2 border-primary/20">
                 <CardHeader className="pb-3">
@@ -397,7 +405,85 @@ const Index = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="staffing" className="space-y-6">
+          <TabsContent value="staffing-aup" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Staffing АУП — Управленческий персонал</CardTitle>
+                <CardDescription>Редактирование ставок административно-управленческого персонала</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-3 gap-4 p-3 bg-gray-50 rounded-lg font-medium">
+                    <div>Должность</div>
+                    <div>Ставки</div>
+                    <div>Комментарий</div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4 p-3 border rounded-lg">
+                    <div className="flex items-center">Директор</div>
+                    <div>
+                      <Input type="number" defaultValue="1.0" step="0.1" />
+                    </div>
+                    <div>
+                      <Input placeholder="Комментарий..." />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 p-3 border rounded-lg">
+                    <div className="flex items-center">Администратор</div>
+                    <div>
+                      <Input type="number" defaultValue="2.0" step="0.1" />
+                    </div>
+                    <div>
+                      <Input placeholder="Комментарий..." />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 p-3 border rounded-lg">
+                    <div className="flex items-center">Менеджер зала</div>
+                    <div>
+                      <Input type="number" defaultValue="1.5" step="0.1" />
+                    </div>
+                    <div>
+                      <Input placeholder="Комментарий..." />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4 p-3 border rounded-lg">
+                    <div className="flex items-center">Бухгалтер</div>
+                    <div>
+                      <Input type="number" defaultValue="0.5" step="0.1" />
+                    </div>
+                    <div>
+                      <Input placeholder="Комментарий..." />
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="font-semibold mb-4">Итоговые показатели АУП</h3>
+                  <div className="grid grid-cols-3 gap-4">
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">Всего ставок</div>
+                      <div className="text-2xl font-semibold">5.0</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">ФОТ АУП</div>
+                      <div className="text-2xl font-semibold">650 000₽</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">% от ТО</div>
+                      <div className="text-2xl font-semibold">5.2%</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="staffing-cbr" className="space-y-6">
             <Tabs defaultValue="m0">
               <TabsList>
                 <TabsTrigger value="m0">М0 (Текущий)</TabsTrigger>
@@ -630,6 +716,96 @@ const Index = () => {
                 </Card>
               </TabsContent>
             </Tabs>
+          </TabsContent>
+
+          <TabsContent value="night-cleaning" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Модель Ночной уборки</CardTitle>
+                <CardDescription>Настройка параметров и расчёт стоимости ночной уборки</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="nu-enabled">Ночная уборка включена</Label>
+                    <Select defaultValue="no">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="no">Нет</SelectItem>
+                        <SelectItem value="yes">Да</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nu-frequency">Частота (раз в неделю)</Label>
+                    <Input
+                      id="nu-frequency"
+                      type="number"
+                      defaultValue="3"
+                      placeholder="Количество раз"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nu-hours">Часы на уборку</Label>
+                    <Input
+                      id="nu-hours"
+                      type="number"
+                      defaultValue="4"
+                      placeholder="Часов за смену"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nu-rate">Ставка (₽/час)</Label>
+                    <Input
+                      id="nu-rate"
+                      type="number"
+                      defaultValue="450"
+                      placeholder="Стоимость часа"
+                    />
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div className="space-y-2">
+                  <Label htmlFor="nu-comment">Комментарий</Label>
+                  <Textarea
+                    id="nu-comment"
+                    placeholder="Дополнительная информация о графике ночной уборки..."
+                    rows={3}
+                  />
+                </div>
+
+                <Separator />
+
+                <div className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="font-semibold mb-4">Расчёт стоимости НУ</h3>
+                  <div className="grid grid-cols-4 gap-4">
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">Часов в месяц</div>
+                      <div className="text-2xl font-semibold">48</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">Стоимость месяц</div>
+                      <div className="text-2xl font-semibold">21 600₽</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">Вклад в LC</div>
+                      <div className="text-2xl font-semibold">0.17%</div>
+                    </div>
+                    <div>
+                      <div className="text-sm text-muted-foreground mb-1">Статус</div>
+                      <Badge variant="secondary" className="text-base">Отключена</Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </div>
